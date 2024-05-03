@@ -1,0 +1,88 @@
+.main_form{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-top: 2rem;
+    justify-content: center;
+}
+
+.forms_send_work{
+    background-color: rgba(64, 150, 197, 0.567);
+    padding: 0 0.5rem;
+    border-radius: 0.2rem;
+    display: flex;
+    flex-direction: column; 
+    border: 0.001rem solid rgb(0, 0, 0);
+}
+
+.forms_send_work label{
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 0.1rem;
+    margin-bottom: 0.1rem;
+}
+
+
+.forms_send_work input{
+    background-color: rgb(238, 238, 238);
+    border: black solid 0.01rem;
+    border-radius: 0.3rem;
+}
+
+.choose{
+    height: 1.9rem;
+}
+
+.choose select{
+    background-color: rgb(238, 238, 238);
+} 
+
+  .forms_send_work {
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid black;
+  }
+
+  .forms_send_work ol {
+    padding-left: 0;
+  }
+
+  .forms_send_work li, div > p {
+    background: #eee;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    list-style-type: none;
+    border: 1px solid black;
+  }
+
+  .file_input img {
+    height: 64px;
+    order: 1;
+  }
+
+  .file_input p {
+    line-height: 32px;
+    padding-left: 10px;
+  }
+
+  .file_input label, .file_input button, #DownloadBut {
+    background-color: #7F9CCB;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px ridge black;
+    font-size: 0.8rem;
+    height: auto;
+  }
+
+  .file_input label:hover, .file_input button:hover {
+    background-color: #2D5BA3;
+    color: white;
+  }
+
+  .file_input label:active, .file_input button:active {
+    background-color: #0D3F8F;
+    color: white;
+  }
