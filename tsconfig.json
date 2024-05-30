@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/auth/card-wrapper.jsx", "components/form-error.jsx", "components/form-success.jsx", "components/spinner.jsx", "components/password-input.tsx", "components/auth/login-form.tsx", "components/auth/headerauth.jsx", "components/ui/form.tsx", "components/ui/avatar.jsx", "components/auth/role-gate.jsx", "components/auth/back-button.jsx", "components/auth/error-card.jsx"],
+  "exclude": ["node_modules"]
+}
