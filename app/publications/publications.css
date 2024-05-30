@@ -1,0 +1,35 @@
+.list_title{
+    margin-top: 1.5rem;
+    margin-left: 2.2rem;
+    font-size: larger;
+    position: relative;
+}
+
+.line_title{
+    border-top: 0.08rem solid black;
+    width: 15rem;
+    position: absolute;
+    top: 4.97rem;
+    left: 14.4rem;
+}
+
+.list_items_sq{
+    margin: 1.5rem auto;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    width: 95%;
+}
+
+.pub_item{
+    width: 64rem;
+    height: 7rem;
+    background-color: rgba(64, 151, 197, 0.342);
+    border-radius: 0.2rem;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.305);
+}
+
+.pub_item p{
+    padding-left: 0.5rem;
+    padding-top: 0.2rem;
+}

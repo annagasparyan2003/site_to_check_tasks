@@ -1,0 +1,17 @@
+.for_items{
+    margin: 2rem auto;
+}
+
+.for_items div{
+    margin-bottom: 0.5rem;
+}
+
+.item_title {
+    color: rgba(0, 0, 0, 0.57);
+    font-size: smaller;
+    font-style: italic;
+}
+
+#item_fill{
+    font-size: smaller;
+}

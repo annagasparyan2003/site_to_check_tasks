@@ -1,0 +1,10 @@
+.main_header{
+    background-color: rgba(64, 151, 197, 0.4);
+    border-bottom: 0.01rem black solid;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: larger;
+    align-items: center;
+}
