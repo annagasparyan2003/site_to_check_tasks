@@ -23,12 +23,10 @@ export default {
                         email: String(credentials.email),
                     },
                 });
-                console.log(user);
                 if (!user || !user.password)
                     return false;
                 if (await bcrypt.compare(String(credentials.password), user.password)) {
                     // delete user.password, delete user.createdAt;
-                    console.log(user);
                     return user;
                 }
             },

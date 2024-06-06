@@ -33,7 +33,6 @@ export default auth((req) => {
     if (nextUrl.search) {
       callbackUrl += nextUrl.search;
     }
-    console.log(callbackUrl)
     const encodedCallbackUrl = encodeURIComponent(callbackUrl);
 
     return Response.redirect(

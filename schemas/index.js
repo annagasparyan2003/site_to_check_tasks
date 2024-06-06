@@ -1,5 +1,13 @@
 import * as z from "zod";
 import { UserRole } from "@prisma/client";
+
+const MAX_FILE_SIZE = 5000000;
+const Accepted_Send_File_Types = [  
+    "application/pdf",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/msword"
+];
+
 const passwordRequired = (data, passwordField, newPasswordField, newPasswordConfirmationField = "newPasswordConfirmation") => {
     const newPasswordEntered = data[newPasswordField] !== undefined;
     const confirmationEntered = data[newPasswordConfirmationField] !== undefined;
@@ -81,3 +89,105 @@ export const RegisterSchema = z
     message: "Пароли не совпадают.",
     path: ["passwordConfirmation"],
 });
+
+export const sendWorkSchema = z.object({
+    email: z.string().email().optional(),
+    fio_student: z.string({
+        required_error: "Поле Фамилия Имя Отчество обязательно",
+        invalid_type_error: "Фамилия Имя Отчество должно быть строкой",
+      })
+      .min(5, { message: "Поле Фамилия Имя Отчество не может состоять меньше чем из 5 букв" })
+      .regex(/^\S+\s+\S+\s+\S+$/, "Поле ФИО должна содержать ровно три слова"),
+    place_work_performers: z.string({
+        required_error: "Поле место работы исполнителя обязательно",
+        invalid_type_error: "Место работы исполнителя должно быть строкой",
+    })
+    .min(3, { message: "Поле место работы исполнителя не может состоять меньше чем из 3 букв" }),
+    name_publication: z.string({
+        required_error: {message: "Поле название публикации обязательно"},
+        invalid_type_error: "Название публикации должно быть строкой",
+    })
+    .min(3, { message: "Поле название публикации не может состоять меньше чем из 3 букв" }),
+    abstract_publication_rus: z.string({
+        required_error: "Поле аннотация на руском языке обязательно",
+        invalid_type_error: "Аннотация на руском языке должно быть строкой",
+      })
+    .min(3, { message: "Поле аннотация на руском языке обязательно" }),
+    abstract_publication_eng: z.string().optional(),  // Если поле не обязательно
+    lang_publication: z.string({
+        required_error: "Поле язык публикации обязательно",
+        invalid_type_error: "Язык Публикации должно быть строкой",
+      })
+    .min(3, { message: "Поле язык публикации обязательно" }),
+    type_publication: z.any(), //.enum(["s1", "s2", "s3", "s4"]),
+    keywords: z.string({
+        required_error: "Поле ключевые слова обязательно",
+        invalid_type_error: "Ключевые слова должно быть строкой",
+      })
+    .min(3, { message: "Поле ключевые слова обязательно" }),
+    volume_publication: z.string({
+        required_error: "Поле обьем публикации обязательно",
+        invalid_type_error: "Объем публикации должно быть строкой",
+      })
+    .min(3, { message: "Поле обьем публикации обязательно" }),
+    output_data: z.string().optional(),  // Если поле не обязательно
+    attach_publication: z
+    .any()
+    .refine((files) => files?.length == 1, "Вы обязательно должны прикрепить публикацию.")
+    .refine((files) => files?.[0]?.size <= MAX_FILE_SIZE, `Максимальный размер файла 5MB.`)
+    .refine(
+      (files) => Accepted_Send_File_Types.includes(files?.[0]?.type),
+      "Только файлы с расширением: .doc, .docx, .pdf and .dot разрешены."
+    ),
+})
+
+export const sendWorkSchemaApi = z.object({
+    user_email: z.string().email(),
+    fio_student: z.string({
+        required_error: "Поле Фамилия Имя Отчество обязательно",
+        invalid_type_error: "Фамилия Имя Отчество должно быть строкой",
+      })
+      .min(5, { message: "Поле Фамилия Имя Отчество не может состоять меньше чем из 5 букв" })
+      .regex(/^\S+\s+\S+\s+\S+$/, "Поле ФИО должна содержать ровно три слова"),
+    place_work_performers: z.string({
+        required_error: "Поле место работы исполнителя обязательно",
+        invalid_type_error: "Место работы исполнителя должно быть строкой",
+    })
+    .min(3, { message: "Поле место работы исполнителя не может состоять меньше чем из 3 букв" }),
+    name_publication: z.string({
+        required_error: {message: "Поле название публикации обязательно"},
+        invalid_type_error: "Название публикации должно быть строкой",
+    })
+    .min(3, { message: "Поле название публикации не может состоять меньше чем из 3 букв" }),
+    abstract_publication_rus: z.string({
+        required_error: "Поле аннотация на руском языке обязательно",
+        invalid_type_error: "Аннотация на руском языке должно быть строкой",
+      })
+    .min(3, { message: "Поле аннотация на руском языке обязательно" }),
+    abstract_publication_eng: z.string().optional(),  // Если поле не обязательно
+    lang_publication: z.string({
+        required_error: "Поле язык публикации обязательно",
+        invalid_type_error: "Язык Публикации должно быть строкой",
+      })
+    .min(3, { message: "Поле язык публикации обязательно" }),
+    type_publication: z.any(), //.enum(["s1", "s2", "s3", "s4"]),
+    keywords: z.string({
+        required_error: "Поле ключевые слова обязательно",
+        invalid_type_error: "Ключевые слова должно быть строкой",
+      })
+    .min(3, { message: "Поле ключевые слова обязательно" }),
+    volume_publication: z.string({
+        required_error: "Поле обьем публикации обязательно",
+        invalid_type_error: "Объем публикации должно быть строкой",
+      })
+    .min(3, { message: "Поле обьем публикации обязательно" }),
+    output_data: z.string().optional(),  // Если поле не обязательно
+    attach_publication: z
+    .any()
+    .refine((files) => files, "Вы обязательно должны прикрепить публикацию.")
+    .refine((files) => files?.size <= MAX_FILE_SIZE, `Максимальный размер файла 5MB.`)
+    .refine(
+      (files) => Accepted_Send_File_Types.includes(files?.type),
+      "Только файлы с расширением: .doc, .docx, .pdf and .dot разрешены."
+    ),
+})

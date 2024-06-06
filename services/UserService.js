@@ -8,7 +8,7 @@ class InMemoryUserService {
       return userFound;
     });
     if (!user) {
-      throw new Error("Invalid email or password");
+      throw new Error("Неправильный адрес электронной почты или пароль");
     }
     return user;
   }

@@ -77,17 +77,29 @@ model PasswordResetToken {
 
 model Post {
   id         Int        @id @default(autoincrement())
-  title      String
+  name_publication String
+  fio_author String
+  place_work_performers String
+  abstract_publication_rus String
+  abstract_publication_eng String
+  lang_publication String
+  keywords String
+  volume_publication String
+  output_data String
+  attach_publication Json?
   published  Boolean    @default(true)
   author     User       @relation(fields: [authorId], references: [id])
   authorId   String
   comments   Json?
-  views      Int        @default(0)
-  likes      Int        @default(0)
-  categories Category[]
+  createdAt     DateTime  @default(now())
+  editedAt     DateTime  @default(now())
+
+  // views      Int        @default(0)
+  // likes      Int        @default(0)
+  type_publication Type_Publication[]
 }
 
-model Category {
+model Type_Publication {
   id    Int    @id @default(autoincrement())
   name  String @unique
   posts Post[]
